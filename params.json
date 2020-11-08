@@ -1,0 +1,40 @@
+{
+    "Hosts": [
+        {
+            "HostId": "1qazxsw23ed",
+            "HostName": "Server-1",
+            "ApiKey": "11111111112222222222333333333344444444445555",
+            "Metrics": [
+                "cpu.user.percentage",
+                "cpu.system.percentage",
+                "cpu.idle.percentage",
+                "memory.free",
+                "memory.used",
+                "memory.total",
+                "filesystem.C.size",
+                "filesystem.C.used",
+                "filesystem.D.size",
+                "filesystem.D.used",
+                "filesystem.E.size",
+                "filesystem.E.used" 
+            ]
+        },
+        {
+            "HostId": "cvfr45tgbnh",
+            "HostName": "Server-2",
+            "ApiKey": "66666666667777777777888888888899999999990000",
+            "Metrics": [
+                "cpu.user.percentage",
+                "cpu.system.percentage",
+                "cpu.idle.percentage",
+                "memory.free",
+                "memory.used",
+                "memory.total",
+                "filesystem.C.size",
+                "filesystem.C.used",
+                "filesystem.D.size",
+                "filesystem.D.used"
+            ]
+        }
+    ]
+}
