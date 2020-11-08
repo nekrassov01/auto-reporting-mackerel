@@ -2,16 +2,13 @@
 $FunctionsDir = "..\powershell-functions\scripts"
 Get-ChildItem -Path $FunctionsDir | ForEach-Object -Process { .$_.FullName }
 
-# フォルダ構成を作る
-$LastMonth = (Get-Date).AddMonths(-1).ToString("yyyyMM")
-$DateTime = (Get-Date).ToString("yyyyMMddHHmmss")
+# フォルダ構成などを準備する
 $DataDir = (New-Item -Path "${PSScriptRoot}\data" -ItemType Directory -Force).FullName
-$MonthDir = (New-Item -Path "${DataDir}\${LastMonth}" -ItemType Directory -Force).FullName
 $LogDir = (New-Item -Path "${PSScriptRoot}\log" -ItemType Directory -Force).FullName
+$MonthDir = (New-Item -Path "${DataDir}\$((Get-Date).AddMonths(-1).ToString("yyyyMM"))" -ItemType Directory -Force).FullName
 
 # ログトレースを開始する
-$LogFile = "${LogDir}\${DateTime}.log"
-Start-Transcript -Path $LogFile -Force -IncludeInvocationHeader >$null
+Start-Transcript -Path "${LogDir}\$((Get-Date).ToString("yyyyMMddHHmmss")).log" -Force -IncludeInvocationHeader >$null
 
 # 自作関数 - Remove-PastFiles: 指定ディレクトリ内で指定日数を経過したファイルを削除する
 Remove-PastFiles -Path $DataDir, $LogDir -Day 365 -Recurse
