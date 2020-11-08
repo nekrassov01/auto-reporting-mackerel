@@ -2,7 +2,7 @@
 $FunctionsDir = "..\powershell-functions\scripts"
 Get-ChildItem -Path $FunctionsDir | ForEach-Object -Process { .$_.FullName }
 
-# フォルダ構成などを準備する
+# フォルダ構成を作る
 $DataDir = (New-Item -Path "${PSScriptRoot}\data" -ItemType Directory -Force).FullName
 $LogDir = (New-Item -Path "${PSScriptRoot}\log" -ItemType Directory -Force).FullName
 $MonthDir = (New-Item -Path "${DataDir}\$((Get-Date).AddMonths(-1).ToString("yyyyMM"))" -ItemType Directory -Force).FullName
