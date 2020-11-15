@@ -1,2 +1,2 @@
 # mackerel-auto-reporting
-Automatically generate reports using mackerel api
+Automatically Generate Reports Using Mackerel API
