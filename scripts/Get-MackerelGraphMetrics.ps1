@@ -1,8 +1,7 @@
-﻿# Load functions: https://github.com/nekrassov01/powershell-functions.git
+﻿# 自作関数読み込み: https://github.com/nekrassov01/powershell-functions.git
 Push-Location -Path $PSScriptRoot
 $FunctionsDir = "..\..\powershell-functions\scripts"
 Get-ChildItem -Path $FunctionsDir | ForEach-Object -Process { .$_.FullName }
-Pop-Location
 
 # フォルダ構成を作る
 $DataDir = (New-Item -Path "${PSScriptRoot}\data" -ItemType Directory -Force).FullName
@@ -10,7 +9,7 @@ $LogDir = (New-Item -Path "${PSScriptRoot}\log" -ItemType Directory -Force).Full
 $MonthDir = (New-Item -Path "${DataDir}\$((Get-Date).AddMonths(-1).ToString("yyyyMM"))" -ItemType Directory -Force).FullName
 
 # ログトレースを開始する
-Start-Transcript -Path "${LogDir}\apiget_$((Get-Date).ToString("yyyyMMddHHmmss")).log" -Force -IncludeInvocationHeader >$null
+Start-Transcript -Path "${LogDir}\apiget_$((Get-Date).ToString("yyyyMMddHHmmss")).log" -Force | Out-Null
 
 # 自作関数 - Remove-PastFiles: 指定ディレクトリ内で指定日数を経過したファイルを削除する
 Remove-PastFiles -Path $DataDir, $LogDir -Day 365 -Recurse
@@ -48,13 +47,16 @@ $Params | ForEach-Object -Process {
         # metricsをファイルに書き出す
         $Result | Export-Csv -Path $OutputPath -Encoding Default -Force -NoTypeInformation
         
-        # 自作関数 - Out-Log: ログにmetricsごとの取得完了を記録する
+        # 自作関数 - Out-Log: ログにmetrics取得完了を記録する
         Out-Log "Done: ${HostName} - ${_}"
     }
 }
 
 # ログトレースを終了する
-Stop-Transcript >$null
+Stop-Transcript | Out-Null
+
+# カレントディレクトリを元に戻す
+Pop-Location
 
 # 変数をクリアする
 Get-Variable | Remove-Variable -ErrorAction SilentlyContinue

@@ -19,10 +19,19 @@ $Params = @{
 
     # エラー出力のリダイレクト先
     RedirectStandardError = "${LogDir}\stderr_$((Get-Date).ToString("yyyyMMddHHmmss")).log"
+
+    # プロンプトを表示しない
+    NoNewWindow = $True
+
+    # プロセスが完了するまで入力を受け取らない
+    Wait = $True
+
+    # 戻り値を有効にする
+    PassThru = $True
 }
 
 # コマンドを実行する
-Start-Process @Params -Wait -PassThru
+Start-Process @Params
 
 # 変数をクリアする
 Get-Variable | Remove-Variable -ErrorAction SilentlyContinue
