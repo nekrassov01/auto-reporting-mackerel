@@ -11,7 +11,7 @@ $MonthDir = (New-Item -Path "${DataDir}\$((Get-Date).AddMonths(-1).ToString("yyy
 # ログトレースを開始する
 Start-Transcript -Path "${LogDir}\apiget_$((Get-Date).ToString("yyyyMMddHHmmss")).log" -Force | Out-Null
 
-# 自作関数 - Remove-PastFiles: 指定ディレクトリ内で指定日数を経過したファイルを削除する
+# 自作関数 - Remove-PastItem: 指定ディレクトリ内で指定日数を経過したファイルを削除する
 Remove-PastItem -Path $DataDir, $LogDir -Day 365 -Property CreationTime
 
 # 自作関数 - Get-UnixTimeFromDateTime: 日時の文字列からUNIX時間を取得する
