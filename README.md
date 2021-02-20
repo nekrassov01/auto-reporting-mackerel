@@ -1,2 +1,2 @@
 # auto-reporting-mackerel
-Automatically Generate Reports Using Mackerel API
+auto-reporting-mackerel uses PowerShell to access the Mackerel API to collect metrics and then uses JupyterLab to generate monthly reports and output HTML.
